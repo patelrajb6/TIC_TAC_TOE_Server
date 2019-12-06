@@ -293,9 +293,10 @@ public class MinMax {
 		for(int i = 0; i < list.size(); i++ )
 		{
 			Node temp = list.get(i);
-			if(temp.getMinMax()==-10)
+			if(temp.getMinMax()==10)
 			{
 				zerolist.add(temp);
+				
 				x = rand.nextInt(zerolist.size());
 			}
 				
@@ -306,7 +307,18 @@ public class MinMax {
 		Node temp;
 		if(zerolist.size()==0)
 		{
-			x = rand.nextInt(list.size());
+			for(int i = 0; i < list.size(); i++ )
+			{
+				Node temp2 = list.get(i);
+				if(temp2.getMinMax()==0)
+				{
+					zerolist.add(temp2);
+					
+					x = i;
+				}
+					
+				
+			}
 			temp = list.get(x);
 		}
 		else
