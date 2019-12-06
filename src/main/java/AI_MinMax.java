@@ -20,6 +20,7 @@ public class AI_MinMax {
 	AI_MinMax(GameInfo gameinfo)
 	{
 		init_board = getBoard(gameinfo.game);
+		System.out.print("checkpoint 3");
 		
 		if(init_board.length != 9)
 		{

@@ -32,13 +32,13 @@ public class MinMax {
 		
 		stateList = createStateList("max", initNode);		//get list of all X moves from initial state
 		
-		System.out.println("\nThese are all the possible moves for X from the initial state: \n");
+		//System.out.println("\nThese are all the possible moves for X from the initial state: \n");
 		
-		printList(stateList);					//print out the possible moves for X
+		//printList(stateList);					//print out the possible moves for X
 		
 		setStateList_MinMaxValues(stateList, 1);			//set initial state minMax values for X moves
 		
-		print_minMax(stateList);				//print out min max for initial board states
+		//print_minMax(stateList);				//print out min max for initial board states
 		
 		
 	}
@@ -234,10 +234,10 @@ public class MinMax {
 			
 			for(int y = 0; y< tempString.length; y++)		//print out the string array for that node
 			{
-				answer+=answer+tempString[y] + " ";
+				answer=answer+tempString[y] + " ";
 
 			}
-			System.out.print(answer);
+			System.out.println(answer);
 			System.out.println();
 		return answer;
         
@@ -275,7 +275,7 @@ public class MinMax {
 			
 			for(int y = 0; y< tempString.length; y++)		//print out the string array for that node
 			{
-				answer+=answer+tempString[y] + " ";
+				answer=answer+tempString[y] + " ";
 
 			}
 			System.out.print(answer);
@@ -293,7 +293,7 @@ public class MinMax {
 		for(int i = 0; i < list.size(); i++ )
 		{
 			Node temp = list.get(i);
-			if(temp.getMinMax()==10)
+			if(temp.getMinMax()==-10)
 			{
 				zerolist.add(temp);
 				x = rand.nextInt(zerolist.size());
@@ -317,7 +317,7 @@ public class MinMax {
 			
 			for(int y = 0; y< tempString.length; y++)		//print out the string array for that node
 			{
-				answer+=answer+tempString[y] + " ";
+				answer=answer+tempString[y] + " ";
 
 			}
 			System.out.print(answer);
