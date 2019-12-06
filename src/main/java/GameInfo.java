@@ -13,6 +13,7 @@ public class GameInfo implements Serializable {
 	String nickName;
 	String game;
 	String error;
+	boolean playAgain;
 	class top3Player
 	{
 		int score;
@@ -33,7 +34,7 @@ public class GameInfo implements Serializable {
 		this.nickName="";
 		this.game="b b b b b b b b b";
 		this.error="";
-		
+		this.playAgain=false;
 	}
 	ArrayList<top3Player> topScores= new ArrayList<top3Player>();
 	

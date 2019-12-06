@@ -118,6 +118,7 @@ public class Server{
 				synchronized(this)
 				{
 					GameInfo clientInfo=(GameInfo)in.readObject();		//reading from the incoming data
+					
 					System.out.println("checkpoint 1");
 				    this.minmaxGame= new AI_MinMax(clientInfo);
 				    System.out.print("checkpoint 2");

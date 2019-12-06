@@ -70,6 +70,7 @@ public class MinMax {
 		printList(stateList);
 		print_minMax(stateList);
 		
+			
 		return stateList;
 	}
 	

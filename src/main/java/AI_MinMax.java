@@ -19,6 +19,7 @@ public class AI_MinMax {
 	
 	AI_MinMax(GameInfo gameinfo)
 	{
+		String previous= gameinfo.game;
 		init_board = getBoard(gameinfo.game);
 		System.out.print("checkpoint 3");
 		
@@ -31,18 +32,35 @@ public class AI_MinMax {
 		MinMax sendIn_InitState = new MinMax(init_board);
 		
 		movesList = sendIn_InitState.findMoves();
-		if(gameinfo.Mode.equals("Easy"))
+		if(movesList.size()==0 )
 		{
-			gameinfo.game=sendIn_InitState.easyMode(movesList);
+			if(gameinfo.playAgain)
+			{
+				gameinfo.playAgain=false;
+				gameinfo.game="b b b b b b b b b";
+			}
+			else
+				gameinfo.game=previous;
+			System.out.print("check4");
+			
 		}
-		else if(gameinfo.Mode.equals("Medium"))
+		else
 		{
-			gameinfo.game=sendIn_InitState.mediumMode(movesList);
+			if(gameinfo.Mode.equals("Easy"))
+			{
+				gameinfo.game=sendIn_InitState.easyMode(movesList);
+			}
+			else if(gameinfo.Mode.equals("Medium"))
+			{
+				gameinfo.game=sendIn_InitState.mediumMode(movesList);
+			}
+			else if(gameinfo.Mode.equals("Expert"))
+			{
+				gameinfo.game=sendIn_InitState.expertMode(movesList);
+			}
 		}
-		else if(gameinfo.Mode.equals("Expert"))
-		{
-			gameinfo.game=sendIn_InitState.expertMode(movesList);
-		}
+		
+		
 		
 	 //printBestMoves();
 	}
