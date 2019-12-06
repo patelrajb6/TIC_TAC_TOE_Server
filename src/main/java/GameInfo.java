@@ -9,9 +9,9 @@ public class GameInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	int playerNum;
 	int playerScore;
-	String Mode="";
+	String Mode;
 	String nickName;
-	String game="b b b b b b b b b";
+	String game;
 	String error;
 	class top3Player
 	{
@@ -23,6 +23,16 @@ public class GameInfo implements Serializable {
 			this.score=scr;
 			this.playerName=nam;
 		}
+		
+	}
+	GameInfo(int count)
+	{
+		this.playerNum=count;
+		this.playerScore=0;
+		this.Mode="";
+		this.nickName="";
+		this.game="b b b b b b b b b";
+		this.error="";
 		
 	}
 	ArrayList<top3Player> topScores= new ArrayList<top3Player>();

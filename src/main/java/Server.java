@@ -69,6 +69,7 @@ public class Server{
 		Socket connection;
 		int count;
 		GameInfo init;
+		
 		AI_MinMax minmaxGame ;
 		ObjectInputStream in;			//their input and output streams for comm.
 		ObjectOutputStream out;
@@ -77,6 +78,7 @@ public class Server{
 			
 			this.connection=s;		
 			this.count=count;
+			this.init= new GameInfo(count-1);
 			
 			
 		}
@@ -116,7 +118,7 @@ public class Server{
 				synchronized(this)
 				{
 					GameInfo clientInfo=(GameInfo)in.readObject();		//reading from the incoming data
-				    minmaxGame= new AI_MinMax(clientInfo);
+				    this.minmaxGame= new AI_MinMax(clientInfo);
 			    	callback.accept(clientInfo);		//displaying and using the info send for gui	
 			    	updateClient(clientInfo);
 				}
@@ -125,7 +127,7 @@ public class Server{
 			}
 			
 			catch(Exception e) {				//if the client closes the connection
-				GameInfo error= new GameInfo();
+				GameInfo error= new GameInfo(count-1);
 		
 				callback.accept(error);
 		    	

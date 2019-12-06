@@ -58,9 +58,7 @@ public class AI_MinMax {
 			
 			//give input message
 			System.out.println("Enter a string to represent the board state:");
-			
-			
-			
+
 			puzzle = info;					//scan in string
 			
 			puzzleParsed = puzzle.split(delim);
