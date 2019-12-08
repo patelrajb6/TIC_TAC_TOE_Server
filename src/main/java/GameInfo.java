@@ -13,19 +13,9 @@ public class GameInfo implements Serializable {
 	String nickName;
 	String game;
 	String error;
-	boolean playAgain;
-	class top3Player
-	{
-		int score;
-		String playerName;
-		
-		top3Player(int scr, String nam)
-		{
-			this.score=scr;
-			this.playerName=nam;
-		}
-		
-	}
+	String reset;
+	boolean playAgain,gameOver; 
+	
 	GameInfo(int count)
 	{
 		this.playerNum=count;
@@ -34,15 +24,18 @@ public class GameInfo implements Serializable {
 		this.nickName="";
 		this.game="b b b b b b b b b";
 		this.error="";
-		this.playAgain=false;
+		this.playAgain= false;
+		this.gameOver=false;
+		reset = " ";
+		
 	}
-	ArrayList<top3Player> topScores= new ArrayList<top3Player>();
+	ArrayList<Top3Player> topScores= new ArrayList<Top3Player>();
 	
-	ArrayList<top3Player> topThree( ArrayList<top3Player> topScores)
+	ArrayList<Top3Player> topThree( ArrayList<Top3Player> topScores)
 	{
-		ArrayList<top3Player>OnlyThree= new ArrayList<top3Player>();
+		ArrayList<Top3Player>OnlyThree= new ArrayList<Top3Player>();
 		Collections.sort(topScores, (e,f)->{
-			return e.score-f.score;
+			return f.score-e.score;
 		});
 		for (int i=0;i<3;i++)
 		{

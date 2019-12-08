@@ -32,11 +32,18 @@ public class AI_MinMax {
 		MinMax sendIn_InitState = new MinMax(init_board);
 		
 		movesList = sendIn_InitState.findMoves();
-		if(movesList.size()==0 )
+		if(gameinfo.gameOver)
 		{
-			if(gameinfo.playAgain)
+			
+			gameinfo.gameOver=false;
+			gameinfo.game=previous;
+		}
+		else if(movesList.size()==0)
+		{
+			if(gameinfo.playAgain )
 			{
 				gameinfo.playAgain=false;
+				gameinfo.gameOver=false;
 				gameinfo.game="b b b b b b b b b";
 			}
 			else

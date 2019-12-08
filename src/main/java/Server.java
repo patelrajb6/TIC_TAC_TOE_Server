@@ -8,6 +8,8 @@ import java.util.function.Consumer;
 
 
 
+
+
 public class Server{
 	int count = 1;	// will count the number of games played
 	ObjectOutputStream out;		//output stream of the server
@@ -15,7 +17,8 @@ public class Server{
 	int portNum;		//getting the port number
 	
 	ArrayList<ClientThread>players= new ArrayList<ClientThread>(); // players will be there
-
+	ArrayList<Top3Player> AlltopScores= new ArrayList<Top3Player>();
+	ArrayList<GameInfo> playerInfo= new ArrayList<GameInfo>();
 	
 	ServerThread server;
 	private Consumer<GameInfo> callback;
@@ -48,7 +51,12 @@ public class Server{
 		    	
 		    	ClientThread client= new ClientThread(mysocket.accept(), count);
 				players.add(client);
-				
+				System.out.println("Check 1");
+				Top3Player temp= new Top3Player(0,"player"+(count-1));
+				AlltopScores.add(temp);
+				playerInfo.add(new GameInfo(count-1));
+				System.out.println(AlltopScores.size());
+				System.out.println("Check 2");
 				//print for the debugging 
 				System.out.println("client has connected to server: " + "client #" + count);
 				
@@ -87,9 +95,31 @@ public class Server{
 		 {
 			try
 			 {
-				ClientThread p= players.get(count-1);
+				for(Top3Player p: AlltopScores)
+					System.out.print(p.playerName+"; "+p.score+ "----  ");
+				System.out.println();
+				ClientThread temp;
+				for(int i=0;i<players.size();i++)
+				{
+					temp= players.get(i);
+					System.out.println(i+":::::: "+ game.playerNum);
+					if(i==game.playerNum)
+					{
+						game.topScores.clear();
+						game.topScores.addAll(AlltopScores);
+						temp.out.writeObject(game);
+					}
+					else
+					{
+						System.out.println("ggggggggggggggggggggg");
+						playerInfo.get(i).topScores.clear();
+						playerInfo.get(i).topScores.addAll(AlltopScores);
+						temp.out.writeObject(playerInfo.get(i));
+					}
+					
+				}
 				
-					p.out.writeObject(game);
+					
 
 			 }
 			 catch(Exception e) {}
@@ -103,6 +133,9 @@ public class Server{
 						//clear the current client list
 				out = new ObjectOutputStream(connection.getOutputStream());		//opens the streams
 				in = new ObjectInputStream(connection.getInputStream());
+				
+				
+				
 				updateClient(init);
 				
 				
@@ -114,14 +147,22 @@ public class Server{
 		while(true)
 		{
 			try {
-				
+				  
 				synchronized(this)
 				{
 					GameInfo clientInfo=(GameInfo)in.readObject();		//reading from the incoming data
-					
-					System.out.println("checkpoint 1");
+					//temp= clientInfo.topScores.get(clientInfo.playerNum);
+					Top3Player temp2= new Top3Player(clientInfo.playerScore,clientInfo.nickName);
+					AlltopScores.set(clientInfo.playerNum, temp2);
+					playerInfo.set(clientInfo.playerNum, clientInfo);
+					for(GameInfo p: playerInfo)
+						System.out.print(p.playerNum+"; "+p.playerScore+ "=======");
+					System.out.println();
+					for(Top3Player p: AlltopScores)
+						System.out.print(p.playerName+"; "+p.score+ "----  ");
+					System.out.println();
 				    this.minmaxGame= new AI_MinMax(clientInfo);
-				    System.out.print("checkpoint 2");
+				    System.out.println("checkpoint 2");
 			    	callback.accept(clientInfo);		//displaying and using the info send for gui	
 			    	updateClient(clientInfo);
 				}
