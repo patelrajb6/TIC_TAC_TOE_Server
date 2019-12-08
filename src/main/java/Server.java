@@ -51,13 +51,11 @@ public class Server{
 		    	
 		    	ClientThread client= new ClientThread(mysocket.accept(), count);
 				players.add(client);
-				System.out.println("Check 1");
+				
 				Top3Player temp= new Top3Player(0,"player"+(count-1));
 				AlltopScores.add(temp);
 				playerInfo.add(new GameInfo(count-1));
-				System.out.println(AlltopScores.size());
-				System.out.println("Check 2");
-				//print for the debugging 
+				
 				System.out.println("client has connected to server: " + "client #" + count);
 				
 				//start the client 
@@ -102,7 +100,7 @@ public class Server{
 				for(int i=0;i<players.size();i++)
 				{
 					temp= players.get(i);
-					System.out.println(i+":::::: "+ game.playerNum);
+					
 					if(i==game.playerNum)
 					{
 						game.topScores.clear();
@@ -151,16 +149,11 @@ public class Server{
 				synchronized(this)
 				{
 					GameInfo clientInfo=(GameInfo)in.readObject();		//reading from the incoming data
-					//temp= clientInfo.topScores.get(clientInfo.playerNum);
+				
 					Top3Player temp2= new Top3Player(clientInfo.playerScore,clientInfo.nickName);
 					AlltopScores.set(clientInfo.playerNum, temp2);
 					playerInfo.set(clientInfo.playerNum, clientInfo);
-					for(GameInfo p: playerInfo)
-						System.out.print(p.playerNum+"; "+p.playerScore+ "=======");
-					System.out.println();
-					for(Top3Player p: AlltopScores)
-						System.out.print(p.playerName+"; "+p.score+ "----  ");
-					System.out.println();
+					
 				    this.minmaxGame= new AI_MinMax(clientInfo);
 				    System.out.println("checkpoint 2");
 			    	callback.accept(clientInfo);		//displaying and using the info send for gui	

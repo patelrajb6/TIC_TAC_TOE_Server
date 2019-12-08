@@ -15,6 +15,7 @@ public class GameInfo implements Serializable {
 	String error;
 	String reset;
 	boolean playAgain,gameOver; 
+	String winner;
 	
 	GameInfo(int count)
 	{
@@ -27,6 +28,7 @@ public class GameInfo implements Serializable {
 		this.playAgain= false;
 		this.gameOver=false;
 		reset = " ";
+		this.winner="none";
 		
 	}
 	ArrayList<Top3Player> topScores= new ArrayList<Top3Player>();

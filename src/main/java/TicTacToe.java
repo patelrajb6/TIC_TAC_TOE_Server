@@ -41,10 +41,31 @@ public class TicTacToe extends Application {
 	Server createServer(){												//function when called creates the server 
         return new Server(sPortNum.getText(),data->{
         	Platform.runLater(()->{
-
+        		String delim = "[ ]+";
         		connections.getItems().clear();
-        		
-        		
+        		for(int i=0;i<data.topScores.size();i++)
+        		{
+        			connections.getItems().add("player: "+i+" connected");
+        		}
+        		if(data.playAgain)
+        		{
+        			gameSummary.getItems().add("player: "+data.playerNum+" is playing again");
+        			data.playAgain=false;
+        		}
+        			
+        		if(!data.game.equals("b b b b b b b b b") )
+        		{
+        			String[] temp= data.game.split(delim);
+            		gameSummary.getItems().add("player: "+data.playerNum+" vs Server       Mode: "+ data.Mode);
+
+            		gameSummary.getItems().add(temp[0]+ " "+temp[1]+ " "+temp[2]);
+            		gameSummary.getItems().add(temp[3]+ " "+temp[4]+ " "+temp[5]);
+            		gameSummary.getItems().add(temp[6]+ " "+temp[7]+ " "+temp[8]);
+            		if(!data.winner.equals("none"))
+            		{
+            			gameSummary.getItems().add(data.winner);
+            		}
+        		}
         		
         		//checking if both have answer
         		
@@ -68,12 +89,33 @@ public class TicTacToe extends Application {
 		top.setFont(Font.font ("Verdana", 20));							//font
 		top.setFill(Color.RED);											//color
 		top.setEffect(ds);
+		top.setStyle(
+				"-fx-font-size: 20px;"
+				+"-fx-font-weight: bold;");
 		
 		Label port= new Label("Enter Port: ");
+		port.setStyle(
+				"-fx-font-size: 20px;"
+				+"-fx-font-weight: bold;");
+		
 		sPortNum = new TextField("5555");				//for the entry of desired port with default 5555
 		sPortNum.setTranslateX(sPortNum.getLayoutX()-300);
+		sPortNum.setStyle(
+				"-fx-font-size: 15px;"
+				+"-fx-font-weight: bold;");
 		
 		startBtn = new Button("Start Game");			//button which starts the server and the game
+		startBtn.setStyle(
+				"-fx-background-color: \n" + 
+				"        rgba(0,0,0,0.08),\n" + 
+				"        linear-gradient(#5a61af, #51536d),\n" + 
+				"        linear-gradient(#e4fbff 0%,#cee6fb 10%, #a5d3fb 50%, #88c6fb 51%, #d5faff 100%);\n" + 
+				"    -fx-background-insets: 0 0 -1 0,0,1;\n" + 
+				"    -fx-background-radius: 5,5,4;\n" + 
+				"    -fx-padding: 10 30 10 30;\n" + 
+				"    -fx-text-fill: #242d35;\n" + 
+				"    -fx-font-size: 14px;"
+				);
 		startBtn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -91,11 +133,15 @@ public class TicTacToe extends Application {
 		 	gridPane.setAlignment(Pos.CENTER); 
 		 	gridPane.add(top, 0, 0); 
 		 	gridPane.add(port, 0, 1); 
-		 	gridPane.add(sPortNum, 1,1 );
+		 	gridPane.add(sPortNum, 2,1 );
 		 	gridPane.add(startBtn, 0, 2);  
-		 	gridPane.setBackground(background);
-
+		 	gridPane.setStyle("-fx-background-image: url(\"image1.jpeg\");"
+					  +  "-fx-background-size: 700.0 800.0;"
+				      + "-fx-background-position: center top; "
+				);
 		
+		 	
+		 	
 		return new Scene(gridPane,600,600);
 		
 	}
