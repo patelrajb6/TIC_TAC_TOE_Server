@@ -29,22 +29,29 @@ public class AI_MinMax {
 			System.exit(-1);
 		}
 		
-		MinMax sendIn_InitState = new MinMax(init_board);
 		
-		movesList = sendIn_InitState.findMoves();
-		if(gameinfo.gameOver)
-		{
+			MinMax sendIn_InitState = new MinMax(init_board);
+			movesList = sendIn_InitState.findMoves();
+		
+		
+			 
 			
-			gameinfo.gameOver=false;
-			gameinfo.game=previous;
+		
+		if(gameinfo.playAgain )
+		{
+			gameinfo.playAgain=false;	
+			gameinfo.game="b b b b b b b b b";
 		}
 		else if(movesList.size()==0)
 		{
-			if(gameinfo.playAgain )
+			
+			
+			if(gameinfo.gameOver)
 			{
-				gameinfo.playAgain=false;
+				
 				gameinfo.gameOver=false;
-				gameinfo.game="b b b b b b b b b";
+				gameinfo.game=previous;
+				//gameinfo.game="b b b b b b b b b";
 			}
 			else
 				gameinfo.game=previous;

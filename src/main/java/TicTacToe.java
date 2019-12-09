@@ -47,14 +47,15 @@ public class TicTacToe extends Application {
         		{
         			connections.getItems().add("player: "+i+" connected");
         		}
-        		if(data.playAgain)
-        		{
-        			gameSummary.getItems().add("player: "+data.playerNum+" is playing again");
-        			data.playAgain=false;
-        		}
+        		
         			
         		if(!data.game.equals("b b b b b b b b b") )
         		{
+        			if(data.playAgain)
+            		{
+            			gameSummary.getItems().add("player: "+data.playerNum+" is playing again");
+            			
+            		}
         			String[] temp= data.game.split(delim);
             		gameSummary.getItems().add("player: "+data.playerNum+" vs Server       Mode: "+ data.Mode);
 
