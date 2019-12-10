@@ -2,8 +2,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+//This class implements the Serializable
 public class GameInfo implements Serializable {
-	/**
+	/*
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -17,6 +18,7 @@ public class GameInfo implements Serializable {
 	boolean playAgain,gameOver; 
 	String winner;
 	
+	//Initialize the all fields 
 	GameInfo(int count)
 	{
 		this.playerNum=count;
@@ -31,8 +33,11 @@ public class GameInfo implements Serializable {
 		this.winner="none";
 		
 	}
+	
+	//TopScores: ArrayList contains the score of the player name with supporting class: Top3Player
 	ArrayList<Top3Player> topScores= new ArrayList<Top3Player>();
 	
+	//sorting function for ArrayList: sort the ArrayList based on the player score.
 	ArrayList<Top3Player> topThree( ArrayList<Top3Player> topScores)
 	{
 		ArrayList<Top3Player>OnlyThree= new ArrayList<Top3Player>();
@@ -43,8 +48,7 @@ public class GameInfo implements Serializable {
 		{
 			OnlyThree.add(topScores.get(i));
 		}
-		return OnlyThree;
-		
+		return OnlyThree;  //return the arrayList of top three player
 	}
 	
 

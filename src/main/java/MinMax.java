@@ -203,25 +203,25 @@ public class MinMax {
 	 * @param list
 	 */
 	String easyMode(ArrayList<Node>list)
-	{
-		int x=0;
-		String answer="";
-		Random rand = new Random(); 
-		ArrayList<Node>zerolist= new ArrayList<Node>();
+	{			//in easy mode the Algorithm chooses the worst possible outcome for X 
+		int x=0;		//counter vqriable			
+		String answer="";	
+		Random rand = new Random(); //used random number to get the worst possible state. 
+		ArrayList<Node>zerolist= new ArrayList<Node>();	//stores the worst possible moves only
 		for(int i = 0; i < list.size(); i++ )
 		{
 			Node temp = list.get(i);
-			if(temp.getMinMax()==-10)
+			if(temp.getMinMax()==-10)			//if the minmax value is -10 then chances of winning with that state is zero
 			{
-				zerolist.add(temp);
-				x = rand.nextInt(zerolist.size());
+				zerolist.add(temp);					
+				x = rand.nextInt(zerolist.size());	//choose from any of the worst  moves list.
 			}
 				
 			
 		}
         // Generate random integers in range 0 to 999 
          
-		Node temp;
+		Node temp;				//if there are no state with -10 then randomly pick any of the state.
 		if(zerolist.size()==0)
 		{
 			x = rand.nextInt(list.size());
@@ -233,18 +233,18 @@ public class MinMax {
 			String[] tempString = temp.getInitStateString();
 			System.out.println("state " + x + ": ");
 			
-			for(int y = 0; y< tempString.length; y++)		//print out the string array for that node
+			for(int y = 0; y< tempString.length; y++)		//build the string for the outcome		
 			{
 				answer=answer+tempString[y] + " ";
 
 			}
-			System.out.println(answer);
+			System.out.println(answer);		//Debugging	
 			System.out.println();
-		return answer;
+		return answer;		//return the state
         
 	}
-	String mediumMode(ArrayList<Node>list)
-	{
+	String mediumMode(ArrayList<Node>list)		
+	{				//just like the easy mode the medium mode makes use of the fact that it stores only states with value =0
 		int x=0;
 		String answer="";
 		Random rand = new Random(); 
@@ -252,7 +252,7 @@ public class MinMax {
 		for(int i = 0; i < list.size(); i++ )
 		{
 			Node temp = list.get(i);
-			if(temp.getMinMax()==0)
+			if(temp.getMinMax()==0)					//only store the values with minmax 0
 			{
 				zerolist.add(temp);
 				x = rand.nextInt(zerolist.size());
@@ -263,7 +263,7 @@ public class MinMax {
         // Generate random integers in range 0 to 999 
          
 		Node temp;
-		if(zerolist.size()==0)
+		if(zerolist.size()==0)			//else choose randomly from the state list
 		{
 			x = rand.nextInt(list.size());
 			temp = list.get(x);
@@ -286,7 +286,7 @@ public class MinMax {
 	
 	}
 	String expertMode(ArrayList<Node>list)
-	{
+	{			//similar to the easy mode and the medium mode uses the value of minmax when value =10
 		int x=0;
 		String answer="";
 		Random rand = new Random(); 
@@ -294,11 +294,11 @@ public class MinMax {
 		for(int i = 0; i < list.size(); i++ )
 		{
 			Node temp = list.get(i);
-			if(temp.getMinMax()==10)
+			if(temp.getMinMax()==10)				//takes all the states with minmax=10
 			{
 				zerolist.add(temp);
 				
-				x = rand.nextInt(zerolist.size());
+				x = rand.nextInt(zerolist.size());			//choose randomly from the list.
 			}
 				
 			
@@ -311,7 +311,7 @@ public class MinMax {
 			for(int i = 0; i < list.size(); i++ )
 			{
 				Node temp2 = list.get(i);
-				if(temp2.getMinMax()==0)
+				if(temp2.getMinMax()==0)				//if not 10 thne look for 0
 				{
 					zerolist.add(temp2);
 					
